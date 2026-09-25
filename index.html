@@ -21,19 +21,19 @@
     nav a:hover { color:var(--yellow); }
     .hero { min-height:720px; display:grid; grid-template-columns:.78fr 1.22fr; gap:18px; align-items:center; padding:44px 0 72px; position:relative; }
     .hero:before { content:"NO\A ADULTING\A ALLOWED"; white-space:pre; position:absolute; right:-8px; top:32px; color:rgba(255,60,242,.2); font-family:Impact,Haettenschweiler,"Arial Black",sans-serif; font-size:clamp(2.5rem,6vw,5rem); line-height:.78; text-align:right; transform:rotate(90deg) translateX(100%); transform-origin:top right; pointer-events:none; }
-    .eyebrow { display:inline-block; background:var(--coral); color:#050507; border:2px solid var(--ink); padding:8px 13px; border-radius:4px; font-size:.76rem; font-weight:1000; text-transform:uppercase; letter-spacing:.08em; transform:rotate(-2deg); box-shadow:4px 4px 0 var(--blue); }
+    .eyebrow { display:inline-block; background:var(--coral); color:#050507; border:2px solid var(--ink); padding:8px 13px; border-radius:999px; font-size:.76rem; font-weight:1000; text-transform:uppercase; letter-spacing:.08em; transform:rotate(-2deg); box-shadow:4px 4px 0 var(--blue); }
     h1 { font-family:Impact,Haettenschweiler,"Arial Black",sans-serif; font-size:clamp(4rem, 8vw, 7rem); line-height:.78; letter-spacing:-.08em; margin:25px 0 24px; max-width:610px; text-transform:uppercase; font-weight:1000; transform:skew(-4deg); text-shadow:4px 4px 0 var(--blue),-2px -2px 0 var(--yellow); }
     h1 span { color:var(--coral); display:block; text-shadow:3px 3px 0 var(--blue),0 0 22px rgba(212,0,255,.5); }
     .hero p { max-width:430px; font-size:1.15rem; line-height:1.55; margin:0 0 28px; color:var(--muted); }
     .actions { display:flex; gap:12px; flex-wrap:wrap; }
-    button, .button { border:2px solid var(--ink); padding:14px 20px; border-radius:0; font:inherit; font-weight:1000; text-transform:uppercase; letter-spacing:.03em; cursor:pointer; transition:transform .16s, box-shadow .16s; clip-path:polygon(2% 0,100% 7%,98% 100%,0 92%); }
+    button, .button { border:2px solid var(--ink); padding:14px 20px; border-radius:999px; font:inherit; font-weight:1000; text-transform:uppercase; letter-spacing:.03em; cursor:pointer; transition:transform .16s, box-shadow .16s; clip-path:none; }
     button:hover, .button:hover { transform:translate(-2px,-2px); box-shadow:4px 4px 0 var(--ink); }
     .primary { background:var(--coral); color:#fff; }
     .secondary { background:var(--paper); }
     .poster { background:#000; border:2px solid var(--coral); border-radius:2px; min-height:560px; position:relative; overflow:visible; box-shadow:14px 14px 0 var(--blue),-8px -8px 0 var(--yellow); transform:rotate(1.5deg); display:grid; place-items:center; clip-path:polygon(1% 0,100% 3%,98% 98%,0 100%); }
     .poster:before { content:""; position:absolute; width:82%; height:82%; background:radial-gradient(circle,rgba(146,0,255,.38),transparent 68%); filter:blur(22px); z-index:0; pointer-events:none; }
     .poster-image { width:100%; height:100%; min-height:560px; object-fit:contain; display:block; position:relative; z-index:1; filter:contrast(1.16) saturate(1.35) drop-shadow(0 0 20px rgba(186,0,255,.35)); mix-blend-mode:screen; }
-    .poster-caption { position:absolute; left:7%; bottom:8%; background:var(--yellow); color:#050507; border:2px solid #050507; padding:10px 14px; border-radius:2px; font-weight:1000; text-transform:uppercase; letter-spacing:.08em; transform:rotate(-4deg); z-index:3; box-shadow:4px 4px 0 #050507; }
+    .poster-caption { position:absolute; left:7%; bottom:8%; background:var(--yellow); color:#050507; border:2px solid #050507; padding:10px 14px; border-radius:999px; font-weight:1000; text-transform:uppercase; letter-spacing:.08em; transform:rotate(-4deg); z-index:3; box-shadow:4px 4px 0 #050507; }
     .sticker { position:absolute; background:var(--yellow); border:2px solid var(--ink); border-radius:50%; width:94px; height:94px; display:grid; place-items:center; text-align:center; font-weight:1000; font-size:.8rem; line-height:1.05; transform:rotate(13deg); right:18px; top:24px; }
     .star { position:absolute; font-size:3rem; color:var(--yellow); z-index:3; }
     .star.one { left:31px; bottom:34px; transform:rotate(-17deg); }.star.two { right:30px; bottom:98px; color:var(--ink); font-size:2rem; }
@@ -59,27 +59,27 @@
   <div class="wrap">
     <header>
       <a class="logo" href="#top"><span class="logo-mark">×</span> adulting not allowed</a>
-      <nav aria-label="Main navigation"><a href="#manifesto">Manifesto</a><a href="#permission">Permission slip</a></nav>
+      <nav aria-label="Main navigation"><a href="#manifesto">the lore</a><a href="#permission">permission pls</a></nav>
     </header>
     <main id="top">
       <section class="hero">
         <div>
-          <span class="eyebrow">Officially off the clock</span>
+          <span class="eyebrow">currently in my no era ✦</span>
           <h1>Do less.<span>Feel better.</span></h1>
-          <p>A tiny corner of the internet for unfinished laundry, ambitious naps, snack dinners, and the radical act of not having it all together.</p>
-          <div class="actions"><a class="button primary" href="#permission">Get a permission slip</a><a class="button secondary" href="#manifesto">Read the rules</a></div>
+          <p>For the chronically online, emotionally overbooked, and spiritually committed to one more episode. Your to-do list can literally wait.</p>
+          <div class="actions"><a class="button primary" href="#permission">i need permission</a><a class="button secondary" href="#manifesto">read the lore</a></div>
         </div>
         <div class="poster" aria-label="A poster that says rest is productive">
           <div class="sticker">NOPE.<br>NOT<br>TODAY.</div><div class="star one">✦</div><div class="star two">✳</div>
           <img class="poster-image" src="assets/adulting-not-allowed-reference.png" alt="Electric purple and magenta street-art lettering reading Adulting Not Allowed" /><div class="poster-caption">reference energy / 001</div>
         </div>
       </section>
-      <div class="ticker"><div class="ticker-track">BREAKING NEWS <span>✦</span> YOUR TO-DO LIST CAN WAIT <span>✦</span> WATER YOURSELF, NOT YOUR CAREER <span>✦</span> BREAKING NEWS <span>✦</span> YOUR TO-DO LIST CAN WAIT <span>✦</span></div></div>
+      <div class="ticker"><div class="ticker-track">BREAKING NEWS <span>✦</span> UR TO-DO LIST IS NOT THE BOSS OF U <span>✦</span> GO DRINK WATER BESTIE <span>✦</span> BREAKING NEWS <span>✦</span> UR TO-DO LIST IS NOT THE BOSS OF U <span>✦</span></div></div>
       <section class="section" id="manifesto">
-        <div class="section-head"><h2>The manifesto for a softer life.</h2><p>No gatekeeping. No gold stars. Just a gentle reminder that your worth is not hiding inside your inbox.</p></div>
-        <div class="rules"><article class="rule"><span class="num">01 / permission</span><h3>You can be unavailable.</h3><p>Not every message needs a thoughtful reply right this second.</p></article><article class="rule"><span class="num">02 / permission</span><h3>Good enough counts.</h3><p>Make the thing. Submit the thing. Let it be a little weird.</p></article><article class="rule"><span class="num">03 / permission</span><h3>Fun is a plan.</h3><p>Put the silly little treat on the calendar. It is important business.</p></article></div>
+        <div class="section-head"><h2>The soft launch of doing less.</h2><p>No gatekeeping. No gold stars. Just a gentle reminder that your worth is not hiding inside your notifications.</p></div>
+        <div class="rules"><article class="rule"><span class="num">01 / permission</span><h3>Leave them on read.</h3><p>Not every text needs a thoughtful reply right this second, bestie.</p></article><article class="rule"><span class="num">02 / permission</span><h3>Delulu but functional.</h3><p>Make the thing. Submit the thing. Let it be a little weird.</p></article><article class="rule"><span class="num">03 / permission</span><h3>Fun is a plan.</h3><p>Put the silly little treat on the calendar. It is important business.</p></article></div>
       </section>
-      <section class="section" id="permission"><div class="permission"><div><span class="eyebrow">Need official approval?</span><h2>Here’s your sign.</h2><p>Generate a highly legitimate permission slip for whatever you are absolutely not doing today.</p></div><div class="slip"><span class="slip-label">This certifies that you are allowed to</span><div class="slip-quote" id="slip-text">cancel one plan without writing a paragraph.</div><button id="new-slip" type="button">Give me another</button></div></div></section>
+      <section class="section" id="permission"><div class="permission"><div><span class="eyebrow">need official approval?</span><h2>Here’s your sign.</h2><p>Generate a highly legitimate permission slip for whatever you are absolutely not doing today.</p></div><div class="slip"><span class="slip-label">this certifies that u are allowed to</span><div class="slip-quote" id="slip-text">cancel one plan without writing a paragraph.</div><button id="new-slip" type="button">another one pls</button></div></div></section>
     </main>
     <footer><span>© 2026 Adulting Not Allowed</span><span>made for the emotionally overbooked ✦</span></footer>
   </div>
