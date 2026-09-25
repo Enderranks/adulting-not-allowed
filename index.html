@@ -10,8 +10,8 @@
     :root { --ink:#f7f0ff; --coral:#d400ff; --cream:#050507; --blue:#6e00ff; --yellow:#d8ff00; --paper:#101014; --muted:#b9a9c9; }
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
-    body { margin:0; color:var(--ink); background:var(--cream); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background-image:linear-gradient(116deg,rgba(255,255,255,.035) 0 1px,transparent 1px 10px),radial-gradient(circle at 10% 10%, rgba(143,0,255,.22), transparent 25%),radial-gradient(circle at 92% 35%, rgba(255,0,221,.16), transparent 22%); background-size:11px 11px,auto,auto; }
-    body:after { content:""; position:fixed; inset:0; pointer-events:none; z-index:20; opacity:.055; background:repeating-linear-gradient(0deg,rgba(255,255,255,.8) 0 1px,transparent 1px 5px); mix-blend-mode:screen; }
+    body { margin:0; color:var(--ink); background:var(--cream); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background-image:linear-gradient(116deg,rgba(255,255,255,.025) 0 1px,transparent 1px 10px),radial-gradient(circle at 10% 10%, rgba(143,0,255,.11), transparent 25%),radial-gradient(circle at 92% 35%, rgba(255,0,221,.08), transparent 22%); background-size:11px 11px,auto,auto; }
+    body:after { content:""; position:fixed; inset:0; pointer-events:none; z-index:20; opacity:.025; background:repeating-linear-gradient(0deg,rgba(255,255,255,.8) 0 1px,transparent 1px 5px); mix-blend-mode:screen; }
     a { color:inherit; text-decoration:none; }
     .wrap { max-width:1260px; margin:0 auto; padding:0 28px; }
     header { display:flex; align-items:center; justify-content:space-between; padding:20px 0; border-bottom:1px solid rgba(255,60,242,.35); text-shadow:0 0 10px rgba(255,60,242,.35); }
@@ -31,8 +31,8 @@
     .primary { background:var(--coral); color:#fff; }
     .secondary { background:var(--paper); }
     .poster { background:#000; border:2px solid var(--coral); border-radius:2px; min-height:560px; position:relative; overflow:visible; box-shadow:14px 14px 0 var(--blue),-8px -8px 0 var(--yellow); transform:rotate(1.5deg); display:grid; place-items:center; clip-path:polygon(1% 0,100% 3%,98% 98%,0 100%); }
-    .poster:before { content:""; position:absolute; width:82%; height:82%; background:radial-gradient(circle,rgba(146,0,255,.38),transparent 68%); filter:blur(22px); z-index:0; pointer-events:none; }
-    .poster-image { width:100%; height:100%; min-height:560px; object-fit:contain; display:block; position:relative; z-index:1; filter:contrast(1.16) saturate(1.35) drop-shadow(0 0 20px rgba(186,0,255,.35)); mix-blend-mode:screen; }
+    .poster:before { content:""; position:absolute; width:82%; height:82%; background:radial-gradient(circle,rgba(146,0,255,.22),transparent 68%); filter:blur(8px); z-index:0; pointer-events:none; }
+    .poster-image { width:100%; height:100%; min-height:560px; object-fit:contain; display:block; position:relative; z-index:1; filter:contrast(1.1) saturate(1.2) drop-shadow(0 0 8px rgba(186,0,255,.2)); mix-blend-mode:screen; }
     .poster-caption { position:absolute; left:7%; bottom:8%; background:var(--yellow); color:#050507; border:2px solid #050507; padding:10px 14px; border-radius:999px; font-weight:1000; text-transform:uppercase; letter-spacing:.08em; transform:rotate(-4deg); z-index:3; box-shadow:4px 4px 0 #050507; }
     .sticker { position:absolute; background:var(--yellow); border:2px solid var(--ink); border-radius:50%; width:94px; height:94px; display:grid; place-items:center; text-align:center; font-weight:1000; font-size:.8rem; line-height:1.05; transform:rotate(13deg); right:18px; top:24px; }
     .star { position:absolute; font-size:3rem; color:var(--yellow); z-index:3; }
@@ -99,7 +99,7 @@
   <div class="wrap">
     <header>
       <a class="logo" href="#top"><span class="logo-mark">×</span> adulting not allowed</a>
-      <nav aria-label="Main navigation"><a href="#balance">the balance</a><a href="#people">the people</a><a href="#events">find plans</a><a href="shop.html">the shop</a><a href="#permission">get playful</a></nav>
+      <nav aria-label="Main navigation"><a href="#balance">the balance</a><a href="#people">the people</a><a href="events.html">find plans</a><a href="shop.html">the shop</a><a href="#permission">get playful</a></nav>
     </header>
     <main id="top">
       <section class="hero">
@@ -123,18 +123,6 @@
           <article class="balance-card people" id="people"><span class="card-kicker">03 / people</span><h3>Find your<br>kind of weird.</h3><p>Meet people who make you laugh, think bigger, and stay out five minutes later.</p><span class="card-stamp">COME AS YOU ARE</span></article>
         </div>
       </section>
-      <section class="section" id="events">
-        <div class="section-head"><h2>Find your next side quest.</h2><p>Random plans for people who are tired of staying in. Tell us where you are and we’ll find a few ways to make the day less ordinary.</p></div>
-        <div class="events-panel">
-          <form class="event-controls" id="event-form">
-            <label class="sr-only" for="event-location">City or ZIP code</label><input id="event-location" name="location" placeholder="Enter your city or ZIP code" autocomplete="postal-code" required />
-            <label class="sr-only" for="event-category">Event category</label><select id="event-category" name="category"><option value="">Anything fun</option><option value="music">Music</option><option value="arts">Arts</option><option value="sports">Sports</option><option value="family">Outdoors & family</option></select>
-            <button type="submit">Find a side quest</button>
-          </form>
-          <p class="event-status" id="event-status" role="status">Try a location to unlock your local side quests.</p>
-          <div class="event-grid" id="event-grid" aria-live="polite"></div>
-        </div>
-      </section>
       <section class="section" id="manifesto">
         <div class="section-head"><h2>The anti-boring manifesto.</h2><p>No gatekeeping. No gold stars. Just a reminder that growing up should give you more freedom to have fun, not less.</p></div>
         <div class="rules"><article class="rule"><span class="num">01 / side quest</span><h3>Make the detour.</h3><p>The best stories usually start when the plan gets a little weird.</p></article><article class="rule"><span class="num">02 / main character</span><h3>Romanticize Tuesday.</h3><p>A normal day is still allowed to have a soundtrack, a fit check, and a plot twist.</p></article><article class="rule"><span class="num">03 / inner child</span><h3>Keep the silly.</h3><p>Being responsible is a skill. Staying playful is a superpower.</p></article></div>
@@ -147,12 +135,6 @@
     const slips = ['take the scenic route home tonight.', 'say yes to the spontaneous plan.', 'wear the outfit that makes no practical sense.', 'turn a regular Tuesday into a core memory.', 'buy the silly little treat.', 'make time for the group chat lore.'];
     const slipText = document.getElementById('slip-text');
     document.getElementById('new-slip').addEventListener('click', () => { const current = slipText.textContent; let next = current; while (next === current) next = slips[Math.floor(Math.random() * slips.length)]; slipText.textContent = next; });
-    const eventForm = document.getElementById('event-form');
-    const eventGrid = document.getElementById('event-grid');
-    const eventStatus = document.getElementById('event-status');
-    const escapeHtml = (value) => String(value || '').replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
-    const renderEvents = (events) => { eventGrid.innerHTML = events.map((event) => `<article class="event-card"><div><span class="event-type">${escapeHtml(event.type || 'SIDE QUEST')}</span><h3>${escapeHtml(event.name)}</h3><div class="event-meta">${escapeHtml(event.date || 'Date TBA')}<br>${escapeHtml(event.venue || 'Location TBA')}<br>${escapeHtml(event.price || 'Check official listing')}</div></div><div><span class="event-provider">${escapeHtml(event.provider || 'Official listing')}</span><br><a class="event-link" href="${escapeHtml(event.url || '#')}" target="_blank" rel="noopener">get tickets ↗</a></div></article>`).join(''); };
-    eventForm.addEventListener('submit', async (event) => { event.preventDefault(); const formData = new FormData(eventForm); const location = formData.get('location'); const category = formData.get('category'); eventStatus.textContent = 'Finding something worth leaving the house for…'; eventGrid.innerHTML = ''; try { const response = await fetch(`/api/events?location=${encodeURIComponent(location)}&category=${encodeURIComponent(category)}`); const payload = await response.json(); renderEvents(payload.events || []); eventStatus.textContent = payload.demo ? `Showing starter picks for ${location}. Live local listings are ready when the event feed is connected.` : `${payload.events.length} side quests found near ${location}.`; } catch (error) { eventStatus.textContent = 'The event radar is taking a nap. Try again in a sec.'; } });
     const shopGrid = document.getElementById('shop-grid');
     const shopStatus = document.getElementById('shop-status');
     let shopDomain = '';
