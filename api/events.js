@@ -1,7 +1,7 @@
 const demoEvents = [
-  { name: 'Late-night creative meetup', type: 'COMMUNITY', date: 'This week · time varies', venue: 'A local spot near you', url: 'https://www.eventbrite.com/' },
-  { name: 'Free music in the park', type: 'MUSIC', date: 'This weekend · free', venue: 'Outside, ideally', url: 'https://www.ticketmaster.com/' },
-  { name: 'Try something you’ve never tried', type: 'SIDE QUEST', date: 'Whenever you stop overthinking', venue: 'Somewhere new', url: 'https://www.meetup.com/' }
+  { name: 'Late-night creative meetup', type: 'COMMUNITY', date: 'This week · time varies', venue: 'A local spot near you', price: 'Free / RSVP', provider: 'Eventbrite', url: 'https://www.eventbrite.com/' },
+  { name: 'Free music in the park', type: 'MUSIC', date: 'This weekend · free', venue: 'Outside, ideally', price: 'Free', provider: 'Ticketmaster', url: 'https://www.ticketmaster.com/' },
+  { name: 'Try something you’ve never tried', type: 'SIDE QUEST', date: 'Whenever you stop overthinking', venue: 'Somewhere new', price: 'Check listing', provider: 'Meetup', url: 'https://www.meetup.com/' }
 ];
 
 module.exports = async function handler(req, res) {
@@ -23,6 +23,8 @@ module.exports = async function handler(req, res) {
       type: event.classifications?.[0]?.segment?.name || 'EVENT',
       date: event.dates?.start?.localDate || 'Date TBA',
       venue: event._embedded?.venues?.[0]?.name || 'Venue TBA',
+      price: event.priceRanges?.[0] ? `$${event.priceRanges[0].min}–$${event.priceRanges[0].max}` : 'Price on official listing',
+      provider: 'Ticketmaster',
       url: event.url
     }));
     return res.status(200).json({ demo: false, events });

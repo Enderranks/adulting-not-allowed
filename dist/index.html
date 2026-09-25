@@ -67,6 +67,7 @@
     .event-type { color:var(--yellow); font-size:.68rem; font-weight:1000; letter-spacing:.1em; text-transform:uppercase; }
     .event-card h3 { font-size:1.3rem; line-height:.98; margin:13px 0 8px; letter-spacing:-.04em; }
     .event-meta { color:var(--muted); font-size:.82rem; line-height:1.4; }
+    .event-provider { color:var(--coral); font-size:.7rem; font-weight:1000; text-transform:uppercase; letter-spacing:.06em; }
     .event-link { display:inline-block; margin-top:14px; color:var(--ink); font-size:.75rem; font-weight:1000; text-transform:uppercase; letter-spacing:.07em; }
     .rules { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
     .rule { min-height:220px; border:2px solid var(--coral); border-radius:2px; padding:23px; background:var(--paper); position:relative; box-shadow:5px 5px 0 rgba(212,0,255,.25); clip-path:polygon(0 2%,98% 0,100% 97%,2% 100%); }
@@ -134,7 +135,7 @@
     const eventGrid = document.getElementById('event-grid');
     const eventStatus = document.getElementById('event-status');
     const escapeHtml = (value) => String(value || '').replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
-    const renderEvents = (events) => { eventGrid.innerHTML = events.map((event) => `<article class="event-card"><div><span class="event-type">${escapeHtml(event.type || 'SIDE QUEST')}</span><h3>${escapeHtml(event.name)}</h3><div class="event-meta">${escapeHtml(event.date || 'Date TBA')}<br>${escapeHtml(event.venue || 'Location TBA')}</div></div><a class="event-link" href="${escapeHtml(event.url || '#')}" target="_blank" rel="noopener">see the details ↗</a></article>`).join(''); };
+    const renderEvents = (events) => { eventGrid.innerHTML = events.map((event) => `<article class="event-card"><div><span class="event-type">${escapeHtml(event.type || 'SIDE QUEST')}</span><h3>${escapeHtml(event.name)}</h3><div class="event-meta">${escapeHtml(event.date || 'Date TBA')}<br>${escapeHtml(event.venue || 'Location TBA')}<br>${escapeHtml(event.price || 'Check official listing')}</div></div><div><span class="event-provider">${escapeHtml(event.provider || 'Official listing')}</span><br><a class="event-link" href="${escapeHtml(event.url || '#')}" target="_blank" rel="noopener">get tickets ↗</a></div></article>`).join(''); };
     eventForm.addEventListener('submit', async (event) => { event.preventDefault(); const formData = new FormData(eventForm); const location = formData.get('location'); const category = formData.get('category'); eventStatus.textContent = 'Finding something worth leaving the house for…'; eventGrid.innerHTML = ''; try { const response = await fetch(`/api/events?location=${encodeURIComponent(location)}&category=${encodeURIComponent(category)}`); const payload = await response.json(); renderEvents(payload.events || []); eventStatus.textContent = payload.demo ? `Showing starter picks for ${location}. Live local listings are ready when the event feed is connected.` : `${payload.events.length} side quests found near ${location}.`; } catch (error) { eventStatus.textContent = 'The event radar is taking a nap. Try again in a sec.'; } });
   </script>
 </body>
