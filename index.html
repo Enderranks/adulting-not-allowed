@@ -70,6 +70,17 @@
     .event-meta { color:var(--muted); font-size:.82rem; line-height:1.4; }
     .event-provider { color:var(--coral); font-size:.7rem; font-weight:1000; text-transform:uppercase; letter-spacing:.06em; }
     .event-link { display:inline-block; margin-top:14px; color:var(--ink); font-size:.75rem; font-weight:1000; text-transform:uppercase; letter-spacing:.07em; }
+    .shop-panel { background:linear-gradient(135deg,#21003b,#050507 70%); border:2px solid var(--coral); padding:28px; box-shadow:9px 9px 0 var(--yellow); clip-path:polygon(0 1%,99% 0,100% 98%,1% 100%); position:relative; }
+    .shop-panel:before { content:"MERCH DROP / 001"; position:absolute; right:22px; top:-16px; padding:8px 12px; background:var(--coral); color:#fff; border:2px solid #050507; font-size:.7rem; font-weight:1000; letter-spacing:.08em; transform:rotate(-3deg); box-shadow:4px 4px 0 var(--yellow); }
+    .shop-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .product-card { background:var(--paper); border:2px solid var(--yellow); min-height:300px; padding:16px; display:flex; flex-direction:column; justify-content:space-between; clip-path:polygon(0 2%,98% 0,100% 97%,2% 100%); transform:rotate(-1deg); }
+    .product-card:nth-child(2){transform:translateY(14px) rotate(1deg);border-color:var(--coral)}.product-card:nth-child(3){transform:rotate(-2deg)}
+    .product-art { height:145px; display:grid; place-items:center; overflow:hidden; background:linear-gradient(135deg,#09000f,#5b00ff); color:var(--yellow); font-family:Impact,Haettenschweiler,"Arial Black",sans-serif; font-size:2.2rem; line-height:.85; text-align:center; text-transform:uppercase; }
+    .product-art img { width:100%; height:100%; object-fit:cover; display:block; }
+    .product-card h3 { font-size:1.15rem; margin:14px 0 5px; line-height:1; }
+    .product-price { color:var(--yellow); font-weight:1000; }
+    .product-card .button { align-self:flex-start; padding:10px 14px; font-size:.74rem; background:var(--yellow); color:#050507; }
+    .shop-status { color:var(--muted); line-height:1.5; margin:0 0 20px; }
     .rules { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
     .rule { min-height:220px; border:2px solid var(--coral); border-radius:2px; padding:23px; background:var(--paper); position:relative; box-shadow:5px 5px 0 rgba(212,0,255,.25); clip-path:polygon(0 2%,98% 0,100% 97%,2% 100%); }
     .rule:nth-child(2) { background:linear-gradient(145deg,#26004f,#09000f); transform:translateY(22px) rotate(2deg); border-color:var(--yellow); }.rule:nth-child(3) { background:linear-gradient(145deg,#d400ff,#5b00ff); color:#fff; transform:rotate(-2deg); border-color:var(--yellow); }
@@ -77,14 +88,14 @@
     .permission { display:grid; grid-template-columns:.8fr 1.2fr; gap:30px; align-items:center; background:linear-gradient(135deg,#1a002a,#050507); color:var(--cream); padding:40px; border:2px solid var(--coral); border-radius:2px; box-shadow:8px 8px 0 var(--blue); clip-path:polygon(0 1%,99% 0,100% 98%,1% 100%); }
     .permission h2 { color:var(--yellow); }.permission p { font-size:1.1rem; line-height:1.5; color:var(--muted); }.slip { background:var(--paper); color:var(--ink); border:3px solid var(--yellow); padding:28px; transform:rotate(2deg); box-shadow:8px 8px 0 var(--coral); min-height:180px; display:flex; flex-direction:column; justify-content:space-between; }.slip-label { text-transform:uppercase; font-size:.7rem; font-weight:900; letter-spacing:.16em; color:var(--yellow); }.slip-quote { font-size:clamp(1.6rem, 3vw, 2.4rem); font-weight:950; letter-spacing:-.06em; line-height:1; margin:22px 0; }.slip button { align-self:flex-start; background:var(--yellow); padding:10px 14px; font-size:.88rem; color:#050507; }
     footer { padding:25px 0 34px; display:flex; justify-content:space-between; gap:20px; font-size:.82rem; font-weight:800; border-top:2px solid var(--coral); color:var(--muted); }
-    @media (max-width:780px) { .wrap{padding:0 19px} nav{gap:12px;font-size:.78rem} .hero{grid-template-columns:1fr; padding-top:35px; min-height:auto; gap:45px} h1{font-size:clamp(4.1rem, 19vw, 7rem)} .poster{min-height:395px; width:94%; margin:0 auto;}.poster-note h2{font-size:2.35rem}.rules,.balance-grid,.event-grid{grid-template-columns:1fr}.rule:nth-child(2),.rule:nth-child(3),.balance-card.work,.balance-card.life,.balance-card.people,.event-card,.event-card:nth-child(2),.event-card:nth-child(3){transform:none}.permission{grid-template-columns:1fr;padding:25px}.events-panel{padding:20px}.section{padding:70px 0}.section-head{display:block}.section-head p{margin-top:17px} footer{display:block} footer span{display:block;margin-top:8px} }
+    @media (max-width:780px) { .wrap{padding:0 19px} nav{gap:12px;font-size:.78rem} .hero{grid-template-columns:1fr; padding-top:35px; min-height:auto; gap:45px} h1{font-size:clamp(4.1rem, 19vw, 7rem)} .poster{min-height:395px; width:94%; margin:0 auto;}.poster-note h2{font-size:2.35rem}.rules,.balance-grid,.event-grid,.shop-grid{grid-template-columns:1fr}.rule:nth-child(2),.rule:nth-child(3),.balance-card.work,.balance-card.life,.balance-card.people,.event-card,.event-card:nth-child(2),.event-card:nth-child(3),.product-card,.product-card:nth-child(2),.product-card:nth-child(3){transform:none}.permission{grid-template-columns:1fr;padding:25px}.events-panel,.shop-panel{padding:20px}.section{padding:70px 0}.section-head{display:block}.section-head p{margin-top:17px} footer{display:block} footer span{display:block;margin-top:8px} }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
       <a class="logo" href="#top"><span class="logo-mark">×</span> adulting not allowed</a>
-      <nav aria-label="Main navigation"><a href="#balance">the balance</a><a href="#people">the people</a><a href="#events">find plans</a><a href="#permission">get playful</a></nav>
+      <nav aria-label="Main navigation"><a href="#balance">the balance</a><a href="#people">the people</a><a href="#events">find plans</a><a href="#shop">the shop</a><a href="#permission">get playful</a></nav>
     </header>
     <main id="top">
       <section class="hero">
@@ -120,6 +131,10 @@
           <div class="event-grid" id="event-grid" aria-live="polite"></div>
         </div>
       </section>
+      <section class="section" id="shop">
+        <div class="section-head"><h2>Wear the reminder.</h2><p>Stickers, tees, and little proof that your life is bigger than your inbox. Fourthwall handles the products, shipping, and checkout.</p></div>
+        <div class="shop-panel"><p class="shop-status" id="shop-status">Loading the latest drop…</p><div class="shop-grid" id="shop-grid" aria-live="polite"></div></div>
+      </section>
       <section class="section" id="manifesto">
         <div class="section-head"><h2>The anti-boring manifesto.</h2><p>No gatekeeping. No gold stars. Just a reminder that growing up should give you more freedom to have fun, not less.</p></div>
         <div class="rules"><article class="rule"><span class="num">01 / side quest</span><h3>Make the detour.</h3><p>The best stories usually start when the plan gets a little weird.</p></article><article class="rule"><span class="num">02 / main character</span><h3>Romanticize Tuesday.</h3><p>A normal day is still allowed to have a soundtrack, a fit check, and a plot twist.</p></article><article class="rule"><span class="num">03 / inner child</span><h3>Keep the silly.</h3><p>Being responsible is a skill. Staying playful is a superpower.</p></article></div>
@@ -138,6 +153,10 @@
     const escapeHtml = (value) => String(value || '').replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
     const renderEvents = (events) => { eventGrid.innerHTML = events.map((event) => `<article class="event-card"><div><span class="event-type">${escapeHtml(event.type || 'SIDE QUEST')}</span><h3>${escapeHtml(event.name)}</h3><div class="event-meta">${escapeHtml(event.date || 'Date TBA')}<br>${escapeHtml(event.venue || 'Location TBA')}<br>${escapeHtml(event.price || 'Check official listing')}</div></div><div><span class="event-provider">${escapeHtml(event.provider || 'Official listing')}</span><br><a class="event-link" href="${escapeHtml(event.url || '#')}" target="_blank" rel="noopener">get tickets ↗</a></div></article>`).join(''); };
     eventForm.addEventListener('submit', async (event) => { event.preventDefault(); const formData = new FormData(eventForm); const location = formData.get('location'); const category = formData.get('category'); eventStatus.textContent = 'Finding something worth leaving the house for…'; eventGrid.innerHTML = ''; try { const response = await fetch(`/api/events?location=${encodeURIComponent(location)}&category=${encodeURIComponent(category)}`); const payload = await response.json(); renderEvents(payload.events || []); eventStatus.textContent = payload.demo ? `Showing starter picks for ${location}. Live local listings are ready when the event feed is connected.` : `${payload.events.length} side quests found near ${location}.`; } catch (error) { eventStatus.textContent = 'The event radar is taking a nap. Try again in a sec.'; } });
+    const shopGrid = document.getElementById('shop-grid');
+    const shopStatus = document.getElementById('shop-status');
+    const renderProducts = (products) => { shopGrid.innerHTML = products.map((product) => `<article class="product-card"><div><div class="product-art">${product.image ? `<img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}">` : 'ADULTING<br>NOT<br>ALLOWED'}</div><h3>${escapeHtml(product.name)}</h3><span class="product-price">${escapeHtml(product.price || 'See details')}</span></div><a class="button" href="${escapeHtml(product.url || '#')}" target="_blank" rel="noopener">shop it ↗</a></article>`).join(''); };
+    fetch('/api/store').then((response) => response.json()).then((payload) => { if (payload.configured && payload.products.length) { renderProducts(payload.products); shopStatus.textContent = 'Official drop, powered by Fourthwall. Checkout and shipping happen securely on their side.'; } else { shopGrid.innerHTML = ''; shopStatus.innerHTML = 'The shop is ready for the first drop. Add your Fourthwall storefront token in Vercel to load products here.'; } }).catch(() => { shopStatus.textContent = 'The shop is taking a tiny nap. Check back soon.'; });
   </script>
 </body>
 </html>
