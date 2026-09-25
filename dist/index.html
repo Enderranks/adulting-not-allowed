@@ -81,6 +81,10 @@
     .product-price { color:var(--yellow); font-weight:1000; }
     .product-card .button { align-self:flex-start; padding:10px 14px; font-size:.74rem; background:var(--yellow); color:#050507; }
     .shop-status { color:var(--muted); line-height:1.5; margin:0 0 20px; }
+    .cart-bar { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:22px; padding:14px 16px; border:2px dashed var(--yellow); background:#050507; }
+    .cart-count { color:var(--yellow); font-weight:1000; text-transform:uppercase; letter-spacing:.06em; }
+    .cart-bar .button { padding:10px 14px; font-size:.74rem; background:var(--coral); color:#fff; }
+    .cart-bar .button[disabled] { opacity:.45; cursor:not-allowed; }
     .rules { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
     .rule { min-height:220px; border:2px solid var(--coral); border-radius:2px; padding:23px; background:var(--paper); position:relative; box-shadow:5px 5px 0 rgba(212,0,255,.25); clip-path:polygon(0 2%,98% 0,100% 97%,2% 100%); }
     .rule:nth-child(2) { background:linear-gradient(145deg,#26004f,#09000f); transform:translateY(22px) rotate(2deg); border-color:var(--yellow); }.rule:nth-child(3) { background:linear-gradient(145deg,#d400ff,#5b00ff); color:#fff; transform:rotate(-2deg); border-color:var(--yellow); }
@@ -133,7 +137,7 @@
       </section>
       <section class="section" id="shop">
         <div class="section-head"><h2>Wear the reminder.</h2><p>Stickers, tees, and little proof that your life is bigger than your inbox. Browse the official Adulting Not Allowed catalog.</p></div>
-        <div class="shop-panel"><p class="shop-status" id="shop-status">Loading the latest drop…</p><div class="shop-grid" id="shop-grid" aria-live="polite"></div></div>
+        <div class="shop-panel"><p class="shop-status" id="shop-status">Loading the latest drop…</p><div class="cart-bar"><span class="cart-count" id="cart-count">0 items in the bag</span><button class="button" id="checkout-button" type="button" disabled>checkout ↗</button></div><div class="shop-grid" id="shop-grid" aria-live="polite"></div></div>
       </section>
       <section class="section" id="manifesto">
         <div class="section-head"><h2>The anti-boring manifesto.</h2><p>No gatekeeping. No gold stars. Just a reminder that growing up should give you more freedom to have fun, not less.</p></div>
@@ -155,8 +159,16 @@
     eventForm.addEventListener('submit', async (event) => { event.preventDefault(); const formData = new FormData(eventForm); const location = formData.get('location'); const category = formData.get('category'); eventStatus.textContent = 'Finding something worth leaving the house for…'; eventGrid.innerHTML = ''; try { const response = await fetch(`/api/events?location=${encodeURIComponent(location)}&category=${encodeURIComponent(category)}`); const payload = await response.json(); renderEvents(payload.events || []); eventStatus.textContent = payload.demo ? `Showing starter picks for ${location}. Live local listings are ready when the event feed is connected.` : `${payload.events.length} side quests found near ${location}.`; } catch (error) { eventStatus.textContent = 'The event radar is taking a nap. Try again in a sec.'; } });
     const shopGrid = document.getElementById('shop-grid');
     const shopStatus = document.getElementById('shop-status');
-    const renderProducts = (products) => { shopGrid.innerHTML = products.map((product) => `<article class="product-card"><div><div class="product-art">${product.image ? `<img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}">` : 'ADULTING<br>NOT<br>ALLOWED'}</div><h3>${escapeHtml(product.name)}</h3><span class="product-price">${escapeHtml(product.price || 'See details')}</span></div>${product.url ? `<a class="button" href="${escapeHtml(product.url)}" target="_blank" rel="noopener">view item ↗</a>` : ''}</article>`).join(''); };
-    fetch('/api/store').then((response) => response.json()).then((payload) => { if (payload.configured && payload.products.length) { renderProducts(payload.products); shopStatus.textContent = 'Official catalog powered by Fourthwall.'; } else { shopGrid.innerHTML = ''; shopStatus.innerHTML = 'The catalog is ready for the first drop. Add your Fourthwall storefront token in Vercel to load products here.'; } }).catch(() => { shopStatus.textContent = 'The catalog is taking a tiny nap. Check back soon.'; });
+    let shopDomain = '';
+    let cartId = localStorage.getItem('adulting-not-allowed-cart') || '';
+    let cartItems = JSON.parse(localStorage.getItem('adulting-not-allowed-cart-items') || '[]');
+    const cartCount = document.getElementById('cart-count');
+    const checkoutButton = document.getElementById('checkout-button');
+    const updateCart = () => { const count = cartItems.reduce((total, item) => total + item.quantity, 0); cartCount.textContent = `${count} ${count === 1 ? 'item' : 'items'} in the bag`; checkoutButton.disabled = !cartId || !shopDomain || count === 0; };
+    const renderProducts = (products) => { shopGrid.innerHTML = products.map((product) => `<article class="product-card"><div><div class="product-art">${product.image ? `<img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}">` : 'ADULTING<br>NOT<br>ALLOWED'}</div><h3>${escapeHtml(product.name)}</h3><span class="product-price">${escapeHtml(product.price || 'See details')}</span></div>${product.variantId ? `<button class="button add-to-bag" type="button" data-variant="${escapeHtml(product.variantId)}" data-name="${escapeHtml(product.name)}">add to bag +</button>` : ''}</article>`).join(''); };
+    shopGrid.addEventListener('click', async (event) => { const button = event.target.closest('.add-to-bag'); if (!button) return; button.disabled = true; button.textContent = 'adding…'; try { const response = await fetch('/api/cart', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ action:'add', cartId, variantId:button.dataset.variant, quantity:1 }) }); const payload = await response.json(); if (!response.ok) throw new Error(payload.error); cartId = payload.cart.id; cartItems = payload.cart.items || [...cartItems, { variantId:button.dataset.variant, quantity:1 }]; localStorage.setItem('adulting-not-allowed-cart', cartId); localStorage.setItem('adulting-not-allowed-cart-items', JSON.stringify(cartItems)); updateCart(); button.textContent = 'in the bag ✓'; } catch (error) { button.disabled = false; button.textContent = 'try again'; } });
+    checkoutButton.addEventListener('click', () => { if (!cartId || !shopDomain) return; window.location.href = `https://${shopDomain}/cart/checkout?cartId=${encodeURIComponent(cartId)}&currency=USD`; });
+    fetch('/api/store').then((response) => response.json()).then((payload) => { shopDomain = payload.shopDomain || ''; updateCart(); if (payload.configured && payload.products.length) { renderProducts(payload.products); shopStatus.textContent = shopDomain ? 'Official catalog powered by Fourthwall. Add something to the bag when you’re ready.' : 'Catalog connected. Add your Fourthwall shop URL in Vercel to enable checkout.'; } else { shopGrid.innerHTML = ''; shopStatus.innerHTML = 'The catalog is ready for the first drop. Add your Fourthwall storefront token in Vercel to load products here.'; } }).catch(() => { shopStatus.textContent = 'The catalog is taking a tiny nap. Check back soon.'; });
   </script>
 </body>
 </html>

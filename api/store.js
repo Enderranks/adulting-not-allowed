@@ -5,6 +5,7 @@ function money(price) {
 
 module.exports = async function handler(req, res) {
   const token = process.env.FOURTHWALL_STOREFRONT_TOKEN;
+  const shopUrl = process.env.FOURTHWALL_SHOP_URL || '';
   if (!token) return res.status(200).json({ configured: false, products: [] });
   try {
     const response = await fetch(`https://storefront-api.fourthwall.com/v1/collections/all/products?storefront_token=${encodeURIComponent(token)}&size=12`);
@@ -14,9 +15,9 @@ module.exports = async function handler(req, res) {
       const variant = product.variants?.[0];
       const image = product.images?.[0]?.url || product.image?.url || product.thumbnail?.url || '';
       const url = product.url || '';
-      return { name: product.name, price: money(product.price || variant?.unitPrice), image, url };
+      return { name: product.name, price: money(product.price || variant?.unitPrice), image, url, variantId: variant?.id || '' };
     });
-    return res.status(200).json({ configured: true, products });
+    return res.status(200).json({ configured: true, products, shopDomain: shopUrl.replace(/^https?:\/\//, '').replace(/\/$/, '') });
   } catch (error) {
     return res.status(502).json({ configured: true, products: [], error: 'Unable to load the Fourthwall catalog.' });
   }
