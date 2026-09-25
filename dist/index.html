@@ -132,7 +132,7 @@
         </div>
       </section>
       <section class="section" id="shop">
-        <div class="section-head"><h2>Wear the reminder.</h2><p>Stickers, tees, and little proof that your life is bigger than your inbox. Fourthwall handles the products, shipping, and checkout.</p></div>
+        <div class="section-head"><h2>Wear the reminder.</h2><p>Stickers, tees, and little proof that your life is bigger than your inbox. Browse the official Adulting Not Allowed catalog.</p></div>
         <div class="shop-panel"><p class="shop-status" id="shop-status">Loading the latest drop…</p><div class="shop-grid" id="shop-grid" aria-live="polite"></div></div>
       </section>
       <section class="section" id="manifesto">
@@ -155,8 +155,8 @@
     eventForm.addEventListener('submit', async (event) => { event.preventDefault(); const formData = new FormData(eventForm); const location = formData.get('location'); const category = formData.get('category'); eventStatus.textContent = 'Finding something worth leaving the house for…'; eventGrid.innerHTML = ''; try { const response = await fetch(`/api/events?location=${encodeURIComponent(location)}&category=${encodeURIComponent(category)}`); const payload = await response.json(); renderEvents(payload.events || []); eventStatus.textContent = payload.demo ? `Showing starter picks for ${location}. Live local listings are ready when the event feed is connected.` : `${payload.events.length} side quests found near ${location}.`; } catch (error) { eventStatus.textContent = 'The event radar is taking a nap. Try again in a sec.'; } });
     const shopGrid = document.getElementById('shop-grid');
     const shopStatus = document.getElementById('shop-status');
-    const renderProducts = (products) => { shopGrid.innerHTML = products.map((product) => `<article class="product-card"><div><div class="product-art">${product.image ? `<img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}">` : 'ADULTING<br>NOT<br>ALLOWED'}</div><h3>${escapeHtml(product.name)}</h3><span class="product-price">${escapeHtml(product.price || 'See details')}</span></div><a class="button" href="${escapeHtml(product.url || '#')}" target="_blank" rel="noopener">shop it ↗</a></article>`).join(''); };
-    fetch('/api/store').then((response) => response.json()).then((payload) => { if (payload.configured && payload.products.length) { renderProducts(payload.products); shopStatus.textContent = 'Official drop, powered by Fourthwall. Checkout and shipping happen securely on their side.'; } else { shopGrid.innerHTML = ''; shopStatus.innerHTML = 'The shop is ready for the first drop. Add your Fourthwall storefront token in Vercel to load products here.'; } }).catch(() => { shopStatus.textContent = 'The shop is taking a tiny nap. Check back soon.'; });
+    const renderProducts = (products) => { shopGrid.innerHTML = products.map((product) => `<article class="product-card"><div><div class="product-art">${product.image ? `<img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}">` : 'ADULTING<br>NOT<br>ALLOWED'}</div><h3>${escapeHtml(product.name)}</h3><span class="product-price">${escapeHtml(product.price || 'See details')}</span></div>${product.url ? `<a class="button" href="${escapeHtml(product.url)}" target="_blank" rel="noopener">view item ↗</a>` : ''}</article>`).join(''); };
+    fetch('/api/store').then((response) => response.json()).then((payload) => { if (payload.configured && payload.products.length) { renderProducts(payload.products); shopStatus.textContent = 'Official catalog powered by Fourthwall.'; } else { shopGrid.innerHTML = ''; shopStatus.innerHTML = 'The catalog is ready for the first drop. Add your Fourthwall storefront token in Vercel to load products here.'; } }).catch(() => { shopStatus.textContent = 'The catalog is taking a tiny nap. Check back soon.'; });
   </script>
 </body>
 </html>
