@@ -14,9 +14,10 @@ module.exports = async function handler(req, res) {
     const data = await response.json();
     const products = (data.results || []).filter((product) => product.state?.type !== 'SOLD_OUT').map((product) => {
       const variant = product.variants?.[0];
-      const image = product.images?.[0]?.url || product.image?.url || product.thumbnail?.url || '';
+      const images = (product.images || []).map((item) => item.url || item.src || '').filter(Boolean);
+      const image = images[0] || product.image?.url || product.thumbnail?.url || '';
       const url = product.url || '';
-      return { name: product.name, price: money(product.price || variant?.unitPrice), image, url, variantId: variant?.id || '' };
+      return { name: product.name, description: product.description || '', price: money(product.price || variant?.unitPrice), image, images, url, variantId: variant?.id || '' };
     });
     return res.status(200).json({ configured: true, products, shopDomain: shopUrl.replace(/^https?:\/\//, '').replace(/\/$/, ''), checkoutDomain: checkoutUrl.replace(/^https?:\/\//, '').replace(/\/$/, '') });
   } catch (error) {
