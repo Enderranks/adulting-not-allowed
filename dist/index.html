@@ -55,15 +55,16 @@
     .balance-card p { max-width:260px; line-height:1.45; margin:0; }
     .card-stamp { position:absolute; right:20px; bottom:20px; padding:8px 11px; border:2px solid currentColor; border-radius:999px; font-size:.68rem; font-weight:1000; transform:rotate(-4deg); }
     .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
-    .events-panel { background:linear-gradient(135deg,#12001e,#050507 68%); border:2px solid var(--yellow); padding:28px; box-shadow:9px 9px 0 var(--coral); clip-path:polygon(0 1%,99% 0,100% 98%,1% 100%); }
+    .events-panel { background:linear-gradient(135deg,#12001e,#050507 68%); border:2px solid var(--yellow); padding:28px; box-shadow:9px 9px 0 var(--coral); clip-path:polygon(0 1%,99% 0,100% 98%,1% 100%); position:relative; }
+    .events-panel:before { content:"SIDE QUEST RADAR / LIVE-ish"; position:absolute; right:22px; top:-16px; padding:8px 12px; background:var(--yellow); color:#050507; border:2px solid #050507; font-size:.7rem; font-weight:1000; letter-spacing:.08em; transform:rotate(3deg); box-shadow:4px 4px 0 var(--coral); }
     .event-controls { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px; }
-    .event-controls input,.event-controls select { flex:1 1 190px; min-width:0; padding:14px 15px; background:#050507; color:var(--ink); border:2px solid var(--muted); border-radius:2px; font:inherit; }
+    .event-controls input,.event-controls select { flex:1 1 190px; min-width:0; padding:14px 15px; background:#050507; color:var(--ink); border:2px solid var(--coral); border-radius:2px; font:inherit; }
     .event-controls input:focus,.event-controls select:focus { outline:2px solid var(--yellow); outline-offset:2px; }
-    .event-controls button { background:var(--yellow); color:#050507; }
+    .event-controls button { background:var(--coral); color:#fff; }
     .event-status { min-height:22px; color:var(--muted); font-size:.86rem; margin:0 0 18px; }
     .event-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-    .event-card { background:var(--paper); border:2px solid var(--coral); padding:18px; min-height:205px; display:flex; flex-direction:column; justify-content:space-between; transform:rotate(-1deg); }
-    .event-card:nth-child(2){transform:translateY(11px) rotate(1deg);border-color:var(--yellow)}.event-card:nth-child(3){transform:rotate(-2deg)}
+    .event-card { background:var(--paper); border:2px solid var(--coral); padding:18px; min-height:205px; display:flex; flex-direction:column; justify-content:space-between; transform:rotate(-1deg); clip-path:polygon(0 2%,98% 0,100% 97%,2% 100%); }
+    .event-card:nth-child(2){background:linear-gradient(145deg,#26004f,#09000f);transform:translateY(11px) rotate(1deg);border-color:var(--yellow)}.event-card:nth-child(3){background:linear-gradient(145deg,#d400ff,#5b00ff);color:#fff;transform:rotate(-2deg);border-color:var(--yellow)}
     .event-type { color:var(--yellow); font-size:.68rem; font-weight:1000; letter-spacing:.1em; text-transform:uppercase; }
     .event-card h3 { font-size:1.3rem; line-height:.98; margin:13px 0 8px; letter-spacing:-.04em; }
     .event-meta { color:var(--muted); font-size:.82rem; line-height:1.4; }
@@ -108,7 +109,7 @@
         </div>
       </section>
       <section class="section" id="events">
-        <div class="section-head"><h2>Get out of the house.</h2><p>Random plans for people who are tired of staying in. Tell us where you are and we’ll find a few ways to make the day less ordinary.</p></div>
+        <div class="section-head"><h2>Find your next side quest.</h2><p>Random plans for people who are tired of staying in. Tell us where you are and we’ll find a few ways to make the day less ordinary.</p></div>
         <div class="events-panel">
           <form class="event-controls" id="event-form">
             <label class="sr-only" for="event-location">City or ZIP code</label><input id="event-location" name="location" placeholder="Enter your city or ZIP code" autocomplete="postal-code" required />
